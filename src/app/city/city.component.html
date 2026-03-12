@@ -1,14 +1,6 @@
 <h1>Városok</h1>
 
-<label for="identifierFilter">Szűrés azonosítóra</label>
-<input type="text"
-placeholder="Azonosító"
-[formControl]="identifierFilter"
-id="identifierFilter"
-class="form-control mb-3"
->
-
-<table class="table table-striped table-success">
+<table class="table table-striped table-success" [formGroup]="cityForm">
     <thead>
         <tr>
             <th>Id</th>
@@ -17,9 +9,26 @@ class="form-control mb-3"
             <th>Állapot</th>
             <th>Helyszín</th>
         </tr>
+        <tr>
+            <th>
+                <input type="text" formControlName="id">
+            </th>
+            <th>
+                <input type="text" formControlName="identifier">
+            </th>
+            <th>
+                <input type="text" formControlName="energyDemand">
+            </th>
+            <th>
+                <input type="text" formControlName="status">
+            </th>
+            <th>
+                <input type="text" formControlName="location">
+            </th>
+        </tr>
     </thead>
     <tbody>
-        @for(city of cityList | cityfilter: identifierFilter.value ; track city.id) {
+        @for(city of (cityList | cityfilter: cityForm.value) ; track city.id) {
             <tr>
                 <td>{{city.id}}</td>
                 <td>{{city.identifier}}</td>
